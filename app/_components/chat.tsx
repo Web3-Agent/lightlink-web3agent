@@ -426,6 +426,103 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             return functionResponse
 
         }
+        if (functionCall.name === 'GET_STATS') {
+            let response: any;
+            let content: string;
+            let role: 'system' | 'function';
+
+            try {
+                response = await fetch(
+                    `/api/lightlink/stats-counters`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    }
+                )
+                const { message, data } = await response.json()
+                if (data && Object.keys(data)?.length) {
+                    content = JSON.stringify({ message, data }) + '\n\n' + 'Here is stats details.'
+                } else {
+                    content = 'No details found!'
+                }
+                role = 'function'
+            } catch (error) {
+                content = JSON.stringify({ error }) + '\n\n' + 'Try to fix the error and show the user the updated code.'
+                role = 'system'
+            }
+
+
+            const functionResponse: ChatRequest = {
+                messages: [
+                    ...chatMessages,
+                    {
+                        id: nanoid(),
+                        name: 'GET_STATS',
+                        role: role,
+                        content: content,
+                    }
+                ],
+                functions: functionSchemas as any
+            }
+
+            return functionResponse
+
+        }
+        if (functionCall.name === 'GET_TOKEN_DETAILS') {
+            const args: { address: string } = JSON.parse(functionCall?.arguments)
+            let response: any;
+            let content: string;
+            let role: 'system' | 'function';
+            console.log({ args })
+
+            if (args && args?.address) {
+                try {
+                    let _address = args.address;
+
+
+                    response = await fetch(
+                        `/api/lightlink/tokens?address=${_address}`,
+                        {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                        }
+                    )
+                    const { message, data } = await response.json()
+                    if (data && Object.keys(data)?.length) {
+                        content = JSON.stringify({ message, data }) + '\n\n' + 'Here is details.'
+                    } else {
+                        content = 'No token details found!'
+                    }
+                    role = 'function'
+                } catch (error) {
+                    content = JSON.stringify({ error }) + '\n\n' + 'Try to fix the error and show the user the updated code.'
+                    role = 'system'
+                }
+            } else {
+                content = "Something went wrong!!!" + '\n\n' + 'Try to fix the error and show the user the updated code.'
+                role = 'system'
+            }
+
+            const functionResponse: ChatRequest = {
+                messages: [
+                    ...chatMessages,
+                    {
+                        id: nanoid(),
+                        name: 'GET_TOKEN_DETAILS',
+                        role: role,
+                        content: content,
+                    }
+                ],
+                functions: functionSchemas as any
+            }
+
+            return functionResponse
+
+        }
         if (functionCall.name === 'GET_ACTUAL_SETTLEMENT_CONTRACT_ADDRESS') {
             // You now have access to the parsed arguments here (assuming the JSON was valid)
             // If JSON is invalid, return an appropriate message to the model so that it may retry?

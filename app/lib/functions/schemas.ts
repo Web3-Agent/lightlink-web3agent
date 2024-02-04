@@ -296,6 +296,30 @@ export const functionSchemas: ChatCompletionFunctions[] = [
         }
     },
     {
+        name: 'GET_STATS',
+        description: 'Get stats',
+        parameters: {
+            type: 'object',
+            description: `This function gets stats information. It returns message and data. Only call this function in a separate chat message do not call it from a message with other text. You need to draw bar graph using array data`,
+            properties: {
+            },
+        }
+    },
+    {
+        name: 'GET_TOKEN_DETAILS',
+        description: 'Get token details for given token address',
+        parameters: {
+            type: 'object',
+            description: `This function gets token information. It returns message and data. Only call this function in a separate chat message do not call it from a message with other text. You need to draw bar graph using array data`,
+            properties: {
+                address: {
+                    type: 'string',
+                    description: 'Address is crypto address of token.'
+                },
+            },
+        }
+    },
+    {
         name: 'GET_GASLESS_SWAP_ACTIVE_ORDERS',
         description: 'Get gasless swap active order Info',
         parameters: {

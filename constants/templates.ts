@@ -493,6 +493,20 @@ export const TRANSACTION_DETAILS_FOR_GRAPH_COMMANDS = [
         note: `This will draw a graph where Y axis wil have count and X axis will have dates.`
     },
 ]
+export const GET_STATS_COMMANDS = [
+    {
+        action: 'GET_STATS',
+        message: 'Give me latest stats',
+        note: `This API will pull latest stats.`
+    },
+]
+export const GET_TOKEN_DETAILS_COMMANDS = [
+    {
+        action: 'GET_TOKEN_DETAILS',
+        message: 'Give me token details for address __ADDRESS__',
+        note: `Sample Query: Give me token details for address 0x18fB38404DADeE1727Be4b805c5b242B5413Fa40`
+    },
+]
 export const MAINNET_TRANSACTION_DETAILS_BY_HASH_COMMANDS = [
     {
         action: 'TRANSACTION_DETAILS_BY_HASH',

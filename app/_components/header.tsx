@@ -76,8 +76,6 @@ const AddressTile: CFC<{ address?: string; label: string; }> = ({
 }) => {
 
 
-  
-
   return (
     <Box
       sx={{
@@ -173,64 +171,67 @@ export function Header() {
       console.error('Please install MetaMask or another Ethereum wallet extension.');
     }
   };
-   const [currentTab, setCurrentTab] = useState('/');
+  const [currentTab, setCurrentTab] = useState('/');
   const { activeTabState, addActiveTabState, updateActiveTabState, setActiveTabState } = useActiveTabStates();
 
   useEffect(() => {
     setCurrentTab(window.location.pathname);
   }, []);
 
-   const Menus = [
+  const Menus = [
     // { title: "Home", src: "https://i.imgur.com/QMNAWX7.png", gap: true, slug: "/home", tab: "home" },
     { title: "Home", src: "https://i.imgur.com/QMNAWX7.png", gap: true, slug: "/", tab: "askWeb3Agent" },
-    // { title: "Ask Web3Agent", src: "https://i.imgur.com/2pHVHza.png", slug: "/", tab: "askWeb3Agent" },
-    { title: "Send Transacetion", src: "https://i.imgur.com/XjBwspt.png", slug: "/", tab: "sendTxn" },
-     { title: "Deploy Contracts", src: "https://i.imgur.com/VT7UdPH.png", slug: "/", tab: "deployContract" },
+    { title: "Light Link GPT", src: "https://i.imgur.com/2pHVHza.png", slug: "https://chat.openai.com/g/g-hWwGhCYsT-light-link-gpt", tab: "askWeb3Agent", type: 'link' },
+    { title: "Send Transaction", src: "https://i.imgur.com/XjBwspt.png", slug: "/", tab: "sendTxn" },
+    { title: "Deploy Contracts", src: "https://i.imgur.com/VT7UdPH.png", slug: "/", tab: "deployContract" },
     //  { title: "Defi", src: "https://i.imgur.com/IYxIvAB.png", slug: "/defi-prompt" },
     { title: "Builder", src: "https://i.imgur.com/IYxIvAB.png", slug: "/builder" },
   ];
 
   return (
-   
+
     <><header className="!sticky top-6 z-10 flex h-16 w-full  border-2 rounded-2xl shrink-0 items-center justify-between bg-gradient-to-b from-background/10 via-background/50 to-background/80 px-8 backdrop-blur-xl">
       <div className="flex items-center gap-4">
         {isConnected ? (
           <>
             {Menus.map((Menu, index) => (
-            <Link onClick={() => { setActiveTabState({ activeTab: Menu?.tab }) }} href={Menu?.slug} className='!text-gray-600 font-semibold'>
+              <Link target={Menu?.type === 'link' ? "_blank" : ''} onClick={() => {
+                Menu?.type !== 'link' &&
+                  setActiveTabState({ activeTab: Menu?.tab })
+              }} href={Menu?.slug} className='!text-gray-600 font-semibold'>
 
-              <li
+                <li
 
-                key={index}
-                className={`flex  rounded-md p-2 pl-3 pr-5 cursor-pointer hover:shadow-2xl hover:border-2 hover:pl-3 hover:pr-5 w-full !text-gray-700  text-sm font-semibold items-center gap-x-2 
+                  key={index}
+                  className={`flex  rounded-md p-2 pl-3 pr-5 cursor-pointer hover:shadow-2xl hover:border-2 hover:pl-3 hover:pr-5 w-full !text-gray-700  text-sm font-semibold items-center gap-x-2 
                 ${Menu.gap ? "mt-1" : "mt-1"} ${index === 0 && "bg-light-white"}
                   
                    ${currentTab === Menu?.tab ? 'shadow-2xl border-2 pl-3 pr-5' : ''}
                   `}
-                onClick={() => setCurrentTab(Menu?.tab)}
+                  onClick={() => setCurrentTab(Menu?.tab)}
 
-              // ${router.asPath === Menu?.slug ? 'bg-gray-200' : ''}
-              >
-                <img height={"20px"} width={"20px"} src={Menu.src} />
+                // ${router.asPath === Menu?.slug ? 'bg-gray-200' : ''}
+                >
+                  <img height={"20px"} width={"20px"} src={Menu.src} />
 
 
-                <span className={`${!open && "hidden"} origin-left duration-200`}>
-                  {Menu.title}
-                </span>
-              </li>
-            </Link>
+                  <span className={`${!open && "hidden"} origin-left duration-200`}>
+                    {Menu.title}
+                  </span>
+                </li>
+              </Link>
 
-          ))}
+            ))}
           </>
         ) : (
-        <></>
+          <></>
         )}
       </div>
 
       <div className="flex items-center justify-end ">
         <div className="flex items-center text-sm">
 
-               <ConnectButton></ConnectButton>
+          <ConnectButton></ConnectButton>
 
 
 
