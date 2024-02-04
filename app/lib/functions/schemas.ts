@@ -286,6 +286,16 @@ export const functionSchemas: ChatCompletionFunctions[] = [
         }
     },
     {
+        name: 'TRANSACTION_DETAILS_FOR_GRAPH',
+        description: 'Get Transaction Count by Day. Please draw a Bar using response data. Array object will have date and tx_count. Make date in X axis and tx_count in Y axis.',
+        parameters: {
+            type: 'object',
+            description: `This function gets transaction count by day information. It returns message and data. Only call this function in a separate chat message do not call it from a message with other text. You need to draw bar graph using array data`,
+            properties: {
+            },
+        }
+    },
+    {
         name: 'GET_GASLESS_SWAP_ACTIVE_ORDERS',
         description: 'Get gasless swap active order Info',
         parameters: {

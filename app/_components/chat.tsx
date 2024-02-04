@@ -379,6 +379,53 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             return functionResponse
 
         }
+        if (functionCall.name === 'TRANSACTION_DETAILS_FOR_GRAPH') {
+            // You now have access to the parsed arguments here (assuming the JSON was valid)
+            // If JSON is invalid, return an appropriate message to the model so that it may retry?
+            // const args: { network: string, chain_name: string } = JSON.parse(functionCall?.arguments)
+            let response: any;
+            let content: string;
+            let role: 'system' | 'function';
+
+            try {
+                response = await fetch(
+                    `/api/lightlink/charts-transactions`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    }
+                )
+                const { message, data } = await response.json()
+                if (data && Object.keys(data)?.length) {
+                    content = JSON.stringify({ message, data }) + '\n\n' + 'Here is Graph Details.'
+                } else {
+                    content = 'No details found!'
+                }
+                role = 'function'
+            } catch (error) {
+                content = JSON.stringify({ error }) + '\n\n' + 'Try to fix the error and show the user the updated code.'
+                role = 'system'
+            }
+
+
+            const functionResponse: ChatRequest = {
+                messages: [
+                    ...chatMessages,
+                    {
+                        id: nanoid(),
+                        name: 'TRANSACTION_DETAILS_FOR_GRAPH',
+                        role: role,
+                        content: content,
+                    }
+                ],
+                functions: functionSchemas as any
+            }
+
+            return functionResponse
+
+        }
         if (functionCall.name === 'GET_ACTUAL_SETTLEMENT_CONTRACT_ADDRESS') {
             // You now have access to the parsed arguments here (assuming the JSON was valid)
             // If JSON is invalid, return an appropriate message to the model so that it may retry?

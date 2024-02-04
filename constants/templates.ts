@@ -472,7 +472,13 @@ export const MAINNET_BLOCK_BY_HASH_COMMANDS = [
     //     note: `Sample Query: Give me the block details for block hash 0x8879f393ce6a4f8bb2a72bcd938e93b35db4551e6c0639dc87ea27433221c76e on the Linea network.`
     // },
 ]
-
+export const TRANSACTION_DETAILS_FOR_GRAPH_COMMANDS = [
+    {
+        action: 'TRANSACTION_DETAILS_FOR_GRAPH',
+        message: 'Give me transaction count details in the Bar Graph.',
+        note: `This will draw a graph where Y axis wil have count and X axis will have dates.`
+    },
+]
 export const MAINNET_TRANSACTION_DETAILS_BY_HASH_COMMANDS = [
     {
         action: 'TRANSACTION_DETAILS_BY_HASH',
