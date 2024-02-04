@@ -7,7 +7,7 @@ export async function GET(request: Request) {
         const hash = url.searchParams.get('hash');
         // const network: any = url.searchParams.get('network');
         if (!hash) {
-            return NextResponse.json({ message: 'Network & Hash is required!', data: { hash } }, { status: 400 });
+            return NextResponse.json({ message: 'Hash is required!', data: { hash } }, { status: 400 });
         }
         const config = {
             headers: {
