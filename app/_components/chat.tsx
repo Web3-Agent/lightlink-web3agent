@@ -1076,14 +1076,15 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             // You now have access to the parsed arguments here (assuming the JSON was valid)
             // If JSON is invalid, return an appropriate message to the model so that it may retry?
             try {
-                const args: { hash: string, network: number } = JSON.parse(functionCall?.arguments)
+                const args: { hash: string } = JSON.parse(functionCall?.arguments)
                 let response: any;
                 let content: string;
                 let role: 'system' | 'function';
-                if (args && args?.network && args?.hash) {
+                const block_input = args.hash;
+                if (args && block_input) {
                     try {
                         response = await fetch(
-                            `/api/block-by-hash?network=${args.network}&hash=${args.hash}`,
+                            `/api/lightlink/block-details?block_input=${block_input}`,
                             {
                                 method: 'GET',
                                 headers: {
@@ -1098,7 +1099,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
                         role = 'system'
                     }
                 } else {
-                    content = "hash and network is required!" + '\n\n' + 'Try to fix the error and show the user the updated code.'
+                    content = "hash is required!" + '\n\n' + 'Try to fix the error and show the user the updated code.'
                     role = 'system'
                 }
                 const functionResponse: ChatRequest = {
@@ -1305,18 +1306,16 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             // You now have access to the parsed arguments here (assuming the JSON was valid)
             // If JSON is invalid, return an appropriate message to the model so that it may retry?
             try {
-                const args: { network: string, blockNumber: any } = JSON.parse(functionCall?.arguments)
+                const args: { blockNumber: any } = JSON.parse(functionCall?.arguments)
                 let response: any;
                 let content: string;
                 let role: 'system' | 'function';
                 console.log({ args })
-                const _network = args?.network;
-                const _blockNumber = isNaN(args?.blockNumber) ? 'latest' : args?.blockNumber;
-                console.log({ _blockNumber, _network })
-                if (args && _network) {
+                const block_input = args?.blockNumber;
+                if (args && block_input) {
                     try {
                         response = await fetch(
-                            `/api/block-details-by-number?network=${_network}&blockNumber=${_blockNumber}`,
+                            `/api/lightlink/block-details?block_input=${block_input}`,
                             {
                                 method: 'GET',
                                 headers: {
@@ -1331,7 +1330,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
                         role = 'system'
                     }
                 } else {
-                    content = "Network is required!" + '\n\n' + 'Try to fix the error and show the user the updated code.'
+                    content = "Block number is required!" + '\n\n' + 'Try to fix the error and show the user the updated code.'
                     role = 'system'
                 }
                 const functionResponse: ChatRequest = {

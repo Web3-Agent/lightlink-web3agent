@@ -14,8 +14,6 @@ export async function GET(request: Request) {
         if (!data) {
             return NextResponse.json({ message: 'No Transaction Found for Chart!', data }, { status: 204 });
         }
-        console.log('👉🏻 Line 17 : ', data.chart_data);
-
         return NextResponse.json({ message: 'Here is details of transaction!', data: data.chart_data }, { status: 200 });
     } catch (error: any) {
         const message = error.message || 'We ran into a problem Try again in a few minutes!';

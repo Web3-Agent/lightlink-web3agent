@@ -472,6 +472,20 @@ export const MAINNET_BLOCK_BY_HASH_COMMANDS = [
     //     note: `Sample Query: Give me the block details for block hash 0x8879f393ce6a4f8bb2a72bcd938e93b35db4551e6c0639dc87ea27433221c76e on the Linea network.`
     // },
 ]
+export const BLOCK_DETAILS_BY_HASH = [
+    {
+        action: 'BLOCK_DETAILS_BY_HASH',
+        message: 'Give me the block details for block hash _BLOCK_HASH_',
+        note: `Sample Query: Give me the block details for block hash 0x5c66d45a002b65584957fd154b88bc5ad3a1625dea54a76845b0a3cca25d1a15`,
+    },
+]
+export const BLOCK_DETAILS_BY_BLOCK_NUMBER = [
+    {
+        action: 'BLOCK_DETAILS_BY_BLOCK_NUMBER',
+        message: 'Give me the block details for block number __BLOCK_NUMBER__',
+        note: `Sample Query: Give me the block details for block number 64154734`,
+    },
+]
 export const TRANSACTION_DETAILS_FOR_GRAPH_COMMANDS = [
     {
         action: 'TRANSACTION_DETAILS_FOR_GRAPH',

@@ -45,7 +45,7 @@ export const functionSchemas: ChatCompletionFunctions[] = [
         description: 'Get Account Balance',
         parameters: {
             type: 'object',
-            description: `This function gets account balance of given walllet address of crypto. It returns message and data. Only call this function in a separate chat message do not call it from a message with other text.`,
+            description: `This function gets account balance of given wallet address of crypto. It returns message and data. Only call this function in a separate chat message do not call it from a message with other text.`,
             properties: {
                 account: {
                     type: 'string',
@@ -63,7 +63,7 @@ export const functionSchemas: ChatCompletionFunctions[] = [
         description: 'This api take parameters like chainId, src, dst, amount, from and slippage.This will returns url for swap. Do not call this again if any error. Just print the error. Only call this function in a separate chat message do not call it from a message with other text.',
         parameters: {
             type: 'object',
-            description: `This will return the deatils after swap. Print all the response with you got from api. Only call this function in a separate chat message do not call it from a message with other text.`,
+            description: `This will return the details after swap. Print all the response with you got from api. Only call this function in a separate chat message do not call it from a message with other text.`,
             properties: {
                 chainId: {
                     type: 'number',
@@ -212,7 +212,7 @@ export const functionSchemas: ChatCompletionFunctions[] = [
                 },
                 contract_address: {
                     type: 'string',
-                    description: 'Contract address is crypto address which holds the top NFT\'s agaist a chain.'
+                    description: 'Contract address is crypto address which holds the top NFT\'s against a chain.'
                 },
             },
             required: ['chain_name', 'contract_address']
@@ -223,7 +223,7 @@ export const functionSchemas: ChatCompletionFunctions[] = [
         description: 'Get NFT Metadata details using chain name, contract address and token_id.',
         parameters: {
             type: 'object',
-            description: `This function gets object that have message and data. Data is object. You need to print each infomation of data object. Make sure you print all. If there is no record in empty data array. Then print that "No NFT metadata Found!" Only call this function in a separate chat message do not call it from a message with other text.`,
+            description: `This function gets object that have message and data. Data is object. You need to print each information of data object. Make sure you print all. If there is no record in empty data array. Then print that "No NFT metadata Found!" Only call this function in a separate chat message do not call it from a message with other text.`,
             properties: {
                 chain_name: {
                     type: 'string',
@@ -287,7 +287,7 @@ export const functionSchemas: ChatCompletionFunctions[] = [
     },
     {
         name: 'TRANSACTION_DETAILS_FOR_GRAPH',
-        description: 'Get Transaction Count by Day. Please draw a Bar using response data. Array object will have date and tx_count. Make date in X axis and tx_count in Y axis.',
+        description: 'Get Transaction Count by Day. Please draw a Graph using response data. Array object will have objects and every object will have date and tx_count. Make date key in X axis and tx_count in Y axis.',
         parameters: {
             type: 'object',
             description: `This function gets transaction count by day information. It returns message and data. Only call this function in a separate chat message do not call it from a message with other text. You need to draw bar graph using array data`,
@@ -300,7 +300,7 @@ export const functionSchemas: ChatCompletionFunctions[] = [
         description: 'Get gasless swap active order Info',
         parameters: {
             type: 'object',
-            description: `This function get gassless swap active order Info using network name. It returns message and data. Only call this function in a separate chat message do not call it from a message with other text.`,
+            description: `This function get gasless swap active order Info using network name. It returns message and data. Only call this function in a separate chat message do not call it from a message with other text.`,
             properties: {
                 network: {
                     type: 'string',
@@ -331,7 +331,7 @@ export const functionSchemas: ChatCompletionFunctions[] = [
         description: 'Provide gas price info for given network name',
         parameters: {
             type: 'object',
-            description: `This function provides gas inforamtion by network anme. It returns message and data. Only call this function in a separate chat message do not call it from a message with other text.`,
+            description: `This function provides gas information by network name. It returns message and data. Only call this function in a separate chat message do not call it from a message with other text.`,
             properties: {
                 network: {
                     type: 'string',
@@ -363,16 +363,12 @@ export const functionSchemas: ChatCompletionFunctions[] = [
             type: 'object',
             description: `This function provides block details by number generated in blockchain by network name. If block not is not given then make block number as latest. It returns message and data. Only call this function in a separate chat message do not call it from a message with other text.`,
             properties: {
-                network: {
-                    type: 'string',
-                    description: 'Network is blockchain node. In the context of blockchain, a network refers to the interconnected system of nodes (computers or devices) that communicate with each other to maintain and operate the blockchain. It\'s the infrastructure that enables the decentralized nature of blockchain technology.'
-                },
                 blockNumber: {
                     type: 'number',
                     description: 'blockNumber is number for block present in blockchain. Default will be latest'
                 },
             },
-            required: ['network', 'blockNumber']
+            required: ['blockNumber']
         }
     },
     {
@@ -382,16 +378,12 @@ export const functionSchemas: ChatCompletionFunctions[] = [
             type: 'object',
             description: `This function provides block details by number generated in blockchain by network name. If block not is not given then make block number as latest. It returns message and data. Only call this function in a separate chat message do not call it from a message with other text.`,
             properties: {
-                network: {
-                    type: 'string',
-                    description: 'Network is blockchain node. In the context of blockchain, a network refers to the interconnected system of nodes (computers or devices) that communicate with each other to maintain and operate the blockchain. It\'s the infrastructure that enables the decentralized nature of blockchain technology.'
-                },
                 hash: {
                     type: 'string',
                     description: 'A transaction hash is a string of letters and numbers that is generated when a cryptocurrency transaction is initiated. It is a unique identifier that is used to track the transaction on the blockchain. Every transaction that occurs on the blockchain is recorded as a block, and each block has a unique hash.'
                 },
             },
-            required: ['network', 'hash']
+            required: ['hash']
         }
     },
     {
