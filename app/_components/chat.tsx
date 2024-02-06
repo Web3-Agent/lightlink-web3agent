@@ -231,7 +231,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
                     const { abi, bytecode, } = await response.json()
                     console.log({ abi, bytecode })
                     const contractAddress = await deployContract(abi, bytecode)
-                    content = JSON.stringify({ contractAddress, abi, bytecode }) + '\n\n' + 'Your contract is compiled.'
+                    content = "\n\n" + "Your contract is deployed and see the following detais. " + JSON.stringify({ contractAddress, abi, bytecode }) + '\n\n'
                     role = 'function'
 
                 } else {
