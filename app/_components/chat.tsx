@@ -124,37 +124,37 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             return error
         }
     };
-    useEffect(() => {
-        const initializeWeb3 = async () => {
-            console.log({ window })
-            // Modern DApp browsers like MetaMask inject a web3 instance
-            if (window.ethereum) {
-                const web3Instance = new Web3(window.ethereum);
-                try {
-                    // Request account access if needed
-                    await window.ethereum.enable();
-                    _setWeb3(web3Instance);
-                } catch (error) {
-                    console.error('User denied account access');
-                }
-            }
-            // Legacy dApp browsers
-            else if (window.web3) {
-                const web3Instance = new Web3(window.web3.currentProvider);
-                let myWeb3 = new Web3(web3Instance);
+    // useEffect(() => {
+    //     const initializeWeb3 = async () => {
+    //         console.log({ window })
+    //         // Modern DApp browsers like MetaMask inject a web3 instance
+    //         if (window.ethereum) {
+    //             const web3Instance = new Web3(window.ethereum);
+    //             try {
+    //                 // Request account access if needed
+    //                 await window.ethereum.enable();
+    //                 _setWeb3(web3Instance);
+    //             } catch (error) {
+    //                 console.error('User denied account access');
+    //             }
+    //         }
+    //         // Legacy dApp browsers
+    //         else if (window.web3) {
+    //             const web3Instance = new Web3(window.web3.currentProvider);
+    //             let myWeb3 = new Web3(web3Instance);
 
-                _setWeb3(myWeb3);
-                // const oldProvider = web3.currentProvider; // keep a reference to metamask provider
+    //             _setWeb3(myWeb3);
+    //             // const oldProvider = web3.currentProvider; // keep a reference to metamask provider
 
-            }
-            // Non-dApp browsers
-            else {
-                console.log('No web3 instance detected');
-            }
-        };
+    //         }
+    //         // Non-dApp browsers
+    //         else {
+    //             console.log('No web3 instance detected');
+    //         }
+    //     };
 
-        initializeWeb3();
-    }, []);
+    //     initializeWeb3();
+    // }, []);
     useEffect(() => {
         const verifyFunction = async (verificationParams: VerifyContractParams) => {
             if (verificationParams) {

@@ -81,7 +81,7 @@ const SideToggle = () => {
             Web3 Agent
           </h1> */}
         </div>
-        {/* <TokenBalancesComponent></TokenBalancesComponent> */}
+        <TokenBalancesComponent></TokenBalancesComponent>
 
         {/* <div className='mt-28 text-sm text-left' >
            
