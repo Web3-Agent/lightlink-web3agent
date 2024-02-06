@@ -90,8 +90,12 @@ export const KLAYTN_DEPLOYMENT_COMMANDS = [
 export const DEFICHAIN_DEPLOYMENT_COMMANDS = [
     {
         action: 'CREATE_CONTRACT',
-        message: 'Write a simple contract that stores a value and deploy.',
-        note: 'This command will create and deploy the contract to connected network.'
+        message: 'Write a simple contract that stores a value.',
+        note: 'Once contract created, please select below command to deploy contract'
+    },
+    {
+        action: 'DEPLOY_CONTRACT',
+        message: 'Deploy this contract.',
     },
     // {
     //     action: 'DEPLOY_KLAYTN_TESTNET',
