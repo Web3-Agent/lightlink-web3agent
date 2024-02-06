@@ -220,6 +220,26 @@ const PEGASUS: Chain = {
 
   }
 };
+const LightlinkMainnet: Chain = {
+  id: 1890,
+  name: 'Phoenix Mainnet',
+  network: 'Phoenix Mainnet',
+  iconUrl: 'https://phoenix.lightlink.io/assets/network_icon.svg',
+  iconBackground: '#fff',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'ETH',
+    symbol: 'ETH',
+  },
+  rpcUrls: {
+    public: { http: ['https://replicator.phoenix.lightlink.io/rpc/v1'] },
+    default: { http: ['https://replicator.phoenix.lightlink.io/rpc/v1'] },
+  },
+  blockExplorers: {
+    default: { name: 'Explorer', url: 'https://phoenix.lightlink.io/' },
+
+  }
+};
 // const NETWORKS = [ pegoTestnet, pego ]
 
 // const config = createConfig({
@@ -246,7 +266,7 @@ const PEGASUS: Chain = {
 
 
 const { chains, publicClient } = configureChains(
-  [PEGASUS],
+  [PEGASUS,goerli,LightlinkMainnet],
   [
     infuraProvider({ apiKey: process.env.INFURA_API_KEY }),
     publicProvider()
